@@ -9,23 +9,23 @@ import javax.persistence.Id;
 
 @Entity
 public class Employee {
-	
-	private @Id@GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
-	  private String name;
-	  private String location;
-	  private String email;
-	  private Date dateOfBirth;
-	  
-	  
-	  public Employee() {}
 
-	  public Employee(String name, String location, String email,Date date) {
+	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+	private String name;
+	private String location;
+	private String email;
+	private Date dateOfBirth;
 
-	    this.name = name;
-	    this.location = location;
-	    this.email = email;
-	    this.dateOfBirth = date;
-	  }
+	public Employee() {
+	}
+
+	public Employee(String name, String location, String email, Date date) {
+
+		this.name = name;
+		this.location = location;
+		this.email = email;
+		this.dateOfBirth = date;
+	}
 
 	public Long getId() {
 		return id;
@@ -66,6 +66,5 @@ public class Employee {
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	  
-	  
+
 }

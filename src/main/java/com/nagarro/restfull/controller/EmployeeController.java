@@ -16,30 +16,29 @@ import com.nagarro.restfull.repository.EmployeeRepository;
 
 @RestController
 public class EmployeeController {
-	
-	private final EmployeeRepository repository;
-	
-	EmployeeController(EmployeeRepository repository) {
-	    this.repository = repository;
-	  }
-	
-	@GetMapping("/employees")
-	  List<Employee> all() {
-	    return repository.findAll();
-	  }
-	
-	@PostMapping("/employees")
-	  Employee newEmployee(@RequestBody Employee newEmployee) {
-	    return repository.save(newEmployee);
-	  }
-	
-	@GetMapping("/employees/{id}")
-	  Employee one(@PathVariable Long id) {
 
-	    return repository.findById(id)
-	      .orElseThrow(() -> new EmployeeNotFoundException(id));
-	  }
-	
+	private final EmployeeRepository repository;
+
+	EmployeeController(EmployeeRepository repository) {
+		this.repository = repository;
+	}
+
+	@GetMapping("/employees")
+	List<Employee> all() {
+		return repository.findAll();
+	}
+
+	@PostMapping("/employees")
+	Employee newEmployee(@RequestBody Employee newEmployee) {
+		return repository.save(newEmployee);
+	}
+
+	@GetMapping("/employees/{id}")
+	Employee one(@PathVariable Long id) {
+
+		return repository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+	}
+
 	@PutMapping("/employees/{id}")
 	public Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
 
@@ -54,62 +53,10 @@ public class EmployeeController {
 			return repository.save(newEmployee);
 		});
 	}
-	
-	@DeleteMapping("/employees/{id}")
-	  void deleteEmployee(@PathVariable Long id) {
-	    repository.deleteById(id);
-	  }
 
-//	private final EmployeeRepository repository;
-//	private final EmployeeModelAssembler assembler;
-//
-//	EmployeeController(EmployeeRepository repository, EmployeeModelAssembler assembler) {
-//
-//		this.repository = repository;
-//		this.assembler = assembler;
-//	}
-//
-//	@GetMapping("/employees")
-//	public CollectionModel<EntityModel<Employee>> all() {
-//
-//		List<EntityModel<Employee>> employees = repository.findAll().stream().map(assembler::toModel) //
-//				.collect(Collectors.toList());
-//
-//		return CollectionModel.of(employees, linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
-//	}
-//
-//	@PostMapping("/employees")
-//	public Employee newEmployee(@RequestBody Employee newEmployee) {
-//		return repository.save(newEmployee);
-//	}
-//
-//	@GetMapping("/employees/{id}")
-//	public EntityModel<Employee> one(@PathVariable Long id) {
-//
-//		Employee employee = repository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
-//
-//		return assembler.toModel(employee);
-//	}
-//
-//	@PutMapping("/employees/{id}")
-//	public Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
-//
-//		return repository.findById(id).map(employee -> {
-//			employee.setName(newEmployee.getName());
-//			employee.setLocation(newEmployee.getLocation());
-//			employee.setEmail(newEmployee.getEmail());
-//			employee.setDateOfBirth(newEmployee.getDateOfBirth());
-//			return repository.save(employee);
-//		}).orElseGet(() -> {
-//			newEmployee.setId(id);
-//			return repository.save(newEmployee);
-//		});
-//	}
-//
-//	@DeleteMapping("/employees/{id}")
-//	public void deleteEmployee(@PathVariable Long id) {
-//		repository.deleteById(id);
-//	}
-//	
-	
+	@DeleteMapping("/employees/{id}")
+	void deleteEmployee(@PathVariable Long id) {
+		repository.deleteById(id);
+	}
+
 }
