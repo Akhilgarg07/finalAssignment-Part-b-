@@ -2,6 +2,7 @@ package com.nagarro.restfull.restcontroller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,8 @@ import com.nagarro.restfull.service.EmployeeRestService;
 @RestController
 public class EmployeeRestController {
 
-	private final EmployeeRestService restService;;
+	@Autowired
+	private EmployeeRestService restService;;
 
 	EmployeeRestController(EmployeeRestService restService) {
 		this.restService = restService;
